@@ -30,8 +30,13 @@ app.post('/api/design/survey',
 	{
 		console.log(req.body.markdown);
 		//var text = marqdown.render( req.query.markdown );
-		var text = marqdown.render( req.body.markdown );
-		res.send( {preview: text} );
+		got.post('http://172.17.0.2:9001/render', {headers: headers, json: true, body: body}).then(function(response){
+			// console.log(response.body.preview);
+			var text = response.body;
+		        res.send( {preview: text} );
+			});
+		// var text = marqdown.render( req.body.markdown );
+		// res.send( {preview: text} );
 	}
 );
 
