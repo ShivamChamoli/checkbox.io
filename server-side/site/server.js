@@ -29,10 +29,10 @@ app.post('/api/design/survey',
 	function(req,res)
 	{
 		console.log(req.body.markdown);
-		//var text = marqdown.render( req.query.markdown );
-		got.post('http://localhost:31000/render', {headers: headers, json: true, body: body}).then(function(response){
+		var text = marqdown.render( req.query.markdown );
+		//got.post('http://localhost:31000/render', {headers: headers, json: true, body: body}).then(function(response){
 			// console.log(response.body.preview);
-			var text = response.body;
+			//var text = response.body;
 		        res.send( {preview: text} );
 			});
 		// var text = marqdown.render( req.body.markdown );
