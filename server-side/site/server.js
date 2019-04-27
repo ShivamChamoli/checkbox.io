@@ -1,9 +1,9 @@
 var express = require('express'),
         cors = require('cors'),
 	marqdown = require('./marqdown.js'),
-	//routes = require('./routes/designer.js'),
-	//votes = require('./routes/live.js'),
-	//upload = require('./routes/upload.js'),
+	// routes = require('./routes/designer.js'),
+	// votes = require('./routes/live.js'),
+	// upload = require('./routes/upload.js'),
 	create = require('./routes/create.js'),
 	study = require('./routes/study.js'),
 	admin = require('./routes/admin.js');
@@ -28,19 +28,18 @@ app.options('/api/study/vote/submit/', cors(corsOptions));
 app.post('/api/design/survey', 
 	function(req,res)
 	{
-		console.log(req.body.markdown);
-		var text = marqdown.render( req.query.markdown );
-		// got.post('http://localhost:31000/render', {headers: headers, json: true, body: body}).then(function(response){
-			// console.log(response.body.preview);
-			// var text = response.body;
-		        // res.send( {preview: text} );
-			// });
-		// var text = marqdown.render( req.body.markdown );
-		res.send( {preview: text} );
+		// console.log(req.body.markdown);
+		// var text = marqdown.render( req.query.markdown );
+		got.post('http://marqdown_service:31000/render', {headers: headers, json: true, body: body}).then(function(response){
+			console.log(response.body.preview);
+			var text = response.body;
+		        res.send( {preview: text} );
+			});
+		// res.send( {preview: text} );
 	}
 );
 
-//app.get('/api/design/survey/all', routes.findAll );
+// app.get('/api/design/survey/all', routes.findAll );
 //app.get('/api/design/survey/:id', routes.findById );
 //app.get('/api/design/survey/admin/:token', routes.findByToken );
 
@@ -75,7 +74,7 @@ app.post('/api/study/admin/notify/', admin.notifyParticipant);
 //app.post('/api/upload', upload.uploadFile );
 
 // survey listing for studies.
-//app.get('/api/design/survey/all/listing', routes.studyListing );
+// app.get('/api/design/survey/all/listing', routes.studyListing );
 
 // Download
 //app.get('/api/design/survey/vote/download/:token', votes.download );
