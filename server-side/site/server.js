@@ -1,5 +1,6 @@
 var express = require('express'),
-        cors = require('cors'),
+		cors = require('cors'),
+		got = require('got'),
 	marqdown = require('./marqdown.js'),
 	// routes = require('./routes/designer.js'),
 	// votes = require('./routes/live.js'),
@@ -28,14 +29,14 @@ app.options('/api/study/vote/submit/', cors(corsOptions));
 app.post('/api/design/survey', 
 	function(req,res)
 	{
-		// console.log(req.body.markdown);
+		console.log(req.body.markdown);
 		// var text = marqdown.render( req.body.markdown );
 		// res.send( {preview: text} );
 		var headers = {"Content-type":"application/json"}
 		got.post('http://marqdown_service:31000/render', {headers: headers, json: true, body: req.body}).then(function(response){
 			console.log(response.body.preview);
 			var text = response.body;
-		    res.send( {preview: text} );
+		    res.send( text );
 			});
 	}
 );
