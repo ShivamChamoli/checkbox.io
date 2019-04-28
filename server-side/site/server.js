@@ -28,14 +28,15 @@ app.options('/api/study/vote/submit/', cors(corsOptions));
 app.post('/api/design/survey', 
 	function(req,res)
 	{
-		console.log(req.body.markdown);
-		var text = marqdown.render( req.body.markdown );
-		// got.post('http://marqdown_service:31000/render', {headers: headers, json: true, body: body}).then(function(response){
-		// 	console.log(response.body.preview);
-		// 	var text = response.body;
-		//         res.send( {preview: text} );
-			// });
-		res.send( {preview: text} );
+		// console.log(req.body.markdown);
+		// var text = marqdown.render( req.body.markdown );
+		// res.send( {preview: text} );
+		var headers = {"Content-type":"application/json"}
+		got.post('http://marqdown_service:31000/render', {headers: headers, json: true, body: req.body}).then(function(response){
+			console.log(response.body.preview);
+			var text = response.body;
+		    res.send( {preview: text} );
+			});
 	}
 );
 
