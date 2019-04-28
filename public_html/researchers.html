@@ -32,7 +32,15 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$('#survey-previewtab').click( function(e) {e.preventDefault(); alert("HEY!!!");/*your_code_here;*/ return false; } );
+			$('#survey-previewtab').click( function(e) {
+					e.preventDefault();
+					var text = $('.field').val();
+					//markdown code here
+					.then(function(){
+						$('#survey-previewtab').val(res.body);
+					})
+				} 
+			);
 			//var dataStudy = $("#template").clone();
 			//dataStudy.id = "";
 			//dataStudy.attr("data-bind", "with: dataStudyModel");
